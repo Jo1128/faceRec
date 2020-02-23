@@ -1,0 +1,203 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Face Recognition App
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /registerUser: #pathname
+    # binds a127 app logic to a route
+    x-swagger-router-controller: face #filename
+    post:
+      description: Function for Register the user
+      operationId: registerUser #function name
+      parameters:
+        - name: data
+          in: body
+          description: Registering the user
+          schema:
+            $ref: "#/definitions/registerUserRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/registerUserResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /login: #pathname
+    # binds a127 app logic to a route
+    x-swagger-router-controller: face #filename
+    post:
+      description: Function for Register the user
+      operationId: login #function name
+      parameters:
+        - name: data
+          in: body
+          description: User Login
+          schema:
+            $ref: "#/definitions/loginRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/loginResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /validateUser: #pathname
+    # binds a127 app logic to a route
+    x-swagger-router-controller: face #filename
+    post:
+      description: Function for Register the user
+      operationId: validateUser #function name
+      parameters:
+        - name: data
+          in: body
+          description: Validating the user.
+          schema:
+            $ref: "#/definitions/validateUserRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/validateUserResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /deleteUser: #pathname
+    # binds a127 app logic to a route
+    x-swagger-router-controller: face #filename
+    post:
+      description: Function for Register the user
+      operationId: deleteUser #function name
+      parameters:
+        - name: data
+          in: body
+          description: Deleting the User
+          schema:
+            $ref: "#/definitions/deleteUserRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/deleteUserResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  registerUserRequest:
+    required:
+      - username
+      - phonenumber
+      - emailid
+      - password
+    properties:
+      username:
+        type: string
+      phonenumber:
+        type: string
+      emailid:
+        type: string
+      password:
+        type: string
+  registerUserResponse:
+    required:
+      - status
+    properties:
+      status:
+        type: string 
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - status
+    properties:
+      status:
+        type: string   
+  loginRequest:
+    required:
+      - phonenumber
+      - password
+    properties:
+      phonenumber:
+        type: string
+      password:
+        type: string
+      lat:
+        type: string
+      long:
+        type: string
+  loginResponse:
+    required:
+      - status
+    properties:
+      status:
+        type: string 
+      message:
+        type: string
+  validateUserRequest:
+    required:
+      - phonenumber
+      - otp
+    properties:
+      phonenumber:
+        type: string
+      otp:
+        type: string
+      lat:
+        type: string
+      long:
+        type: string
+  validateUserResponse:
+    required:
+      - status
+    properties:
+      status:
+        type: string 
+      message:
+        type: string
+  deleteUserRequest:
+    required:
+      - phonenumber
+    properties:
+      phonenumber:
+        type: string
+      password:
+        type: string
+      lat:
+        type: string
+      long:
+        type: string
+  deleteUserResponse:
+    required:
+      - status
+    properties:
+      status:
+        type: string 
+      message:
+        type: string      
