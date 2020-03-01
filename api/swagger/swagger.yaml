@@ -10,9 +10,11 @@ schemes:
 # format of bodies a client can send (Content-Type)
 consumes:
   - application/json
+  - multipart/form-data
 # format of the responses to the client (Accepts)
 produces:
   - application/json
+  - multipart/form-data
 paths:
   /registerUser: #pathname
     # binds a127 app logic to a route
@@ -21,11 +23,10 @@ paths:
       description: Function for Register the user
       operationId: registerUser #function name
       parameters:
-        - name: data
-          in: body
+        - name: file
+          in: formData
           description: Registering the user
-          schema:
-            $ref: "#/definitions/registerUserRequest"
+          type: file
       responses:
         "200":
           description: Success
