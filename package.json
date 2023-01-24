@@ -13,11 +13,11 @@
     "moment": "^2.24.0",
     "mongoose": "^5.8.11",
     "nodemailer": "^6.4.3",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.7.0"
   },
   "devDependencies": {
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^6.3.3"
   },
   "scripts": {
     "start": "node app.js",
